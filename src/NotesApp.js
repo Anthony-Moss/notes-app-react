@@ -40,6 +40,7 @@ export default class NotesApp extends React.Component {
                 <NotesDetail 
                     className={styles.detail} 
                     note={theNote}
+                    handleSave={this._updateNote}
                 />
             </div>
         );
@@ -71,5 +72,31 @@ export default class NotesApp extends React.Component {
                 };
             }
         });
+        this.setState({
+            notes: updatedNotes1
+        });
+        // ===========================================================================
+        // Version 2a:
+        // const updatedNotes2 = this.state.notes.filter(note => {
+        //     return note.id !== idToUpdate;
+        // });
+        // const theNoteToUpdate = this.state.notes.find(note => note.id === idToUpdate);
+        // this.setState({
+        //     notes: [
+        //         ...updatedNotes2,
+        //         {
+        //             ...theNoteToUpdate,
+        //             text: newText
+        //         }
+        //     ]
+        // });
+        // =========================================================================
+        // Alternatively version 2b
+        // this.setState({
+        //     notes: updatedNotes2.concat({
+        //         ...theNoteToUpdate,
+        //         text: newText
+        //     })
+        // });
     }
 }
