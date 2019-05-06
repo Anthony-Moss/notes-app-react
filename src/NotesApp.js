@@ -1,15 +1,14 @@
+
 import React from 'react';
 import NotesList from './NotesList';
 import NotesDetail from './NotesDetail';
 import styles from './NotesApp.module.css';
-
 export default class NotesApp extends React.Component {
-
     constructor(props) {
         super(props);
-
         this.state = {
-            notes: [      // This will hold array of objects
+            selectedNote: '1001',
+            notes: [      // This will hold an array of objects
                 {
                     id: '1001',
                     title: 'first note',
@@ -18,34 +17,38 @@ export default class NotesApp extends React.Component {
                 {
                     id: '1002',
                     title: 'second note',
-                    text: 'this is the second note'
+                    text: 'yonder, it is the second note'
                 },
                 {
                     id: '1003',
                     title: 'third note',
-                    text: 'this is the third note'
-                }
+                    text: 'imagine poop emojis here.'
+                },
             ]
         }
     }
+
     render() {
+        const theNote = this.state.notes.find(note => this.state.selectedNote === note.id);
         return (
             <div className={styles.app}>
-                <NotesList className={styles.list}
-                notes={this.state.notes}
-                handleSelection={this._selectNote}
+                <NotesList 
+                    className={styles.list}
+                    notes={this.state.notes}
+                    handleSelection={this._selectNote}
+                />                
+                <NotesDetail 
+                    className={styles.detail} 
+                    note={theNote}
                 />
-                <NotesDetail className={styles.detail}/>
             </div>
         );
     }
 
-    _selectNote  = (id) => {
+    _selectNote = (id) => {
         // choose a note to show
         this.setState({
-            seletedNote: id
+            selectedNote: id
         });
     }
 }
-
-
